@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Source+Code+Pro:wght@400;600&display=swap">
+    <link rel="stylesheet" href="stylo.css">
+    <link rel="stylesheet" href="styloflexbox.css">
+    <link rel="stylesheet" href="stylo3.css">
+    <title>ALQUIPC · Panel de facturación</title>
+</head>
+
+<body>
+    <header class="hero">    git init
+    git add .
+    git commit -m "Implementa simulador ALQUIPC"
+        <div class="hero__content">
+            <p class="hero__eyebrow">ALQUIPC · Gestión inteligente del alquiler</p>
+            <h1>Simulador de facturación y trazabilidad de servicios</h1>
+            <p>
+                Esta herramienta reemplaza al ejecutable defectuoso y permite calcular, en línea, las solicitudes de
+                alquiler de equipos portátiles. No imprime recibos: genera un resumen verificable para enviarlo por
+                correo a cada cliente según la política de reciclaje.
+            </p>
+            <div class="hero__metrics">
+                <article>
+                    <span>Tarifa base</span>
+                    <strong>$35.000 COP</strong>
+                    <small>Por equipo y por día</small>
+                </article>
+                <article>
+                    <span>Modalidades</span>
+                    <strong>Ciudad · Foráneo · Local</strong>
+                    <small>Ajustes automáticos ±5%</small>
+                </article>
+                <article>
+                    <span>Optimización</span>
+                    <strong>Descuento seguro</strong>
+                    <small>Hasta 10% por días extra</small>
+                </article>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="panel-grid" aria-label="Panel operativo de ALQUIPC">
+            <article class="panel panel--form">
+                <header>
+                    <p class="eyebrow">Ingreso de datos</p>
+                    <h2>Captura de solicitud</h2>
+                    <p class="panel__lead">
+                        Diligencia la información que entrega la operadora para obtener el valor total, los ajustes por
+                        modalidad y el Id-cliente generado automáticamente.
+                    </p>
+                </header>
+
+                <form id="quote-form" novalidate>
+                    <fieldset>
+                        <legend>Identificación del cliente</legend>
+                        <label for="client-name">Nombre completo</label>
+                        <input type="text" id="client-name" name="clientName" placeholder="Ej. María Rodríguez"
+                            maxlength="80" required>
+
+                        <label for="client-email">Correo electrónico</label>
+                        <input type="email" id="client-email" name="clientEmail" placeholder="cliente@alquipc.com"
+                            maxlength="120" required>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Configuración del alquiler</legend>
+                        <label for="equipment-count">Número de equipos (mínimo 2)</label>
+                        <input type="number" id="equipment-count" name="equipment" min="2" max="200"
+                            placeholder="Ej. 12" required>
+
+                        <label for="initial-days">Días iniciales</label>
+                        <input type="number" id="initial-days" name="initialDays" min="1" max="60" placeholder="Ej. 5"
+                            required>
+
+                        <label for="extra-days">Días adicionales</label>
+                        <input type="number" id="extra-days" name="extraDays" min="0" max="60" value="0">
+
+                        <label for="location-option">Modalidad de alquiler</label>
+                        <select id="location-option" name="location" required>
+                            <option value="ciudad">Dentro de la ciudad</option>
+                            <option value="foranea">Fuera de la ciudad (+5%)</option>
+                            <option value="local">Dentro del establecimiento (-5%)</option>
+                        </select>
+
+                        <label for="notes">Observaciones internas</label>
+                        <textarea id="notes" name="notes" rows="3"
+                            placeholder="Anota logística, tipo de evento o compromisos de entrega."></textarea>
+                    </fieldset>
+
+                    <div class="form__actions">
+                        <button class="btn btn--primary" type="submit">Calcular propuesta</button>
+                        <button class="btn btn--ghost" type="button" id="reset-form">Limpiar</button>
+                    </div>
+                    <p class="form__note">Los datos se validan contra las políticas de calidad McCall: exactitud,
+                        fiabilidad y facilidad de uso.</p>
+                </form>
+
+                <details class="rule-card">
+                    <summary>¿Cómo se mejoró la regla de días adicionales?</summary>
+                    <p>
+                        Antes se descontaba el 2% por cada día adicional sin límite. El simulador aplica la misma tasa,
+                        pero la limita al 10% del subtotal para evitar pérdidas y mantener la sostenibilidad financiera.
+                    </p>
+                </details>
+
+                <div class="messages" id="form-messages" role="status" aria-live="assertive"></div>
+            </article>
+
+            <article class="panel panel--summary" aria-live="polite">
+                <header>
+                    <p class="eyebrow">Resumen para correo</p>
+                    <h2>Estado actual</h2>
+                </header>
+                <div id="summary-output" class="summary">
+                    <p>Completa el formulario para generar el Id-cliente, los descuentos aplicados y el valor final a
+                        facturar.</p>
+                </div>
+            </article>
+        </section>
+
+        <section class="quality" aria-label="Aplicación de la norma McCall">
+            <h2>Prácticas de calidad utilizadas</h2>
+            <div class="quality__grid">
+                <article>
+                    <h3>Corrección & fiabilidad</h3>
+                    <p>Validaciones estrictas en rangos de días y equipos, cálculo determinístico y mensajes claros para
+                        el operador.</p>
+                </article>
+                <article>
+                    <h3>Mantenibilidad</h3>
+                    <p>Separación de responsabilidades (HTML semántico, CSS modular y JavaScript dedicado) facilita
+                        futuras mejoras.</p>
+                </article>
+                <article>
+                    <h3>Usabilidad</h3>
+                    <p>Controles accesibles, lectura en vivo y resumen listo para copiar y enviar sin impresiones.</p>
+                </article>
+                <article>
+                    <h3>Eficiencia</h3>
+                    <p>Los cálculos se realizan en el navegador sin peticiones extra, generando respuestas en tiempo
+                        real.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <small>Proyecto académico · Instructor Ramiro E. Barrientos · SENA</small>
+    </footer>
+
+    <script src="app.js" type="module"></script>
+</body>
+
+</html>
