@@ -30,8 +30,3 @@ Aplicativo web en HTML, CSS y JavaScript que reemplaza el ejecutable con errores
 - **Mantenibilidad:** Código separado por responsabilidades (HTML semántico, CSS modular y JavaScript dedicado).
 - **Eficiencia:** Todo se procesa en el navegador, sin dependencias externas.
 
-## Próximos pasos sugeridos
-
-- Publicar el sitio en GitHub Pages y adjuntar el enlace en Classroom.
-- Documentar en tu cuaderno cómo se aplicaron los factores de McCall durante el desarrollo.
-- (Opcional) Añadir pruebas unitarias básicas en JavaScript para validar las reglas de negocio.

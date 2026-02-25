@@ -214,4 +214,3 @@ if (form) {
 if (resetButton) {
     resetButton.addEventListener("click", handleReset);
 }
-***
