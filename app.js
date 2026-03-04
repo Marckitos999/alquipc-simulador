@@ -12,7 +12,7 @@ var resetButton = document.getElementById("reset-form");
 
 function validarNombre(nombre) {
     // Solo letras y espacios
-    var regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    var x = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
     return regex.test(nombre);
 }
 
@@ -87,14 +87,12 @@ function calcular() {
     var costoBase = TARIFA_BASE * equipos * diasIniciales;
     var costoExtra = TARIFA_BASE * equipos * diasExtra;
 
-    // Descuento días adicionales (2% por día extra, máximo 10%)
-    var porcentajeDescuento = diasExtra * 0.02;
-    if (porcentajeDescuento > 0.1) {
-        porcentajeDescuento = 0.1; // Limitar al 10%
-    }
-    var valorDescuento = costoExtra * porcentajeDescuento;
+    // Recargo por días adicionales (2% adicional por cada día extra)
+    var porcentajeRecargo = diasExtra * 0.02;
+    var valorRecargo = costoExtra * porcentajeRecargo;
 
-    var subtotal = costoBase + costoExtra - valorDescuento;
+    // Ahora sumamos el recargo en lugar de restarlo como descuento
+    var subtotal = costoBase + costoExtra + valorRecargo;
 
     // Ajuste por modalidad
     var porcentajeAjuste = 0;
@@ -126,7 +124,9 @@ function calcular() {
     resumenHTML += "<hr>";
     resumenHTML += "<p><strong>Subtotal días iniciales:</strong> " + formatearMoneda(costoBase) + "</p>";
     resumenHTML += "<p><strong>Costo días adicionales:</strong> " + formatearMoneda(costoExtra) + "</p>";
-    resumenHTML += "<p><strong>Descuento (días adicionales):</strong> -" + formatearMoneda(valorDescuento) + "</p>";
+    if (diasExtra > 0) {
+        resumenHTML += "<p><strong>Recargo (días adicionales):</strong> +" + formatearMoneda(valorRecargo) + "</p>";
+    }
 
     if (valorAjuste >= 0) {
         resumenHTML += "<p><strong>Ajuste por modalidad:</strong> +" + formatearMoneda(valorAjuste) + "</p>";
