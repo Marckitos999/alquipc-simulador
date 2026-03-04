@@ -12,7 +12,7 @@ var resetButton = document.getElementById("reset-form");
 
 function validarNombre(nombre) {
     // Solo letras y espacios
-    var x = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    var regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
     return regex.test(nombre);
 }
 
